@@ -39,7 +39,6 @@ class MyRetrofit : AppCompatActivity() {
                     for (myData in productList) {
                         collectDataInStringBuilder.append(myData.title + " ")
                     }
-                    binding.TextAi.text = collectDataInStringBuilder
 
                 }
             }
