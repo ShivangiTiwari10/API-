@@ -1,4 +1,4 @@
-package com.example.api
+package com.example.api.mydataClass
 
 data class MyData(
     val limit: Int,

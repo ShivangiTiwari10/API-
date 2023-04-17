@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.api.`interface`.MyApiInterface
+import com.example.api.mydataClass.MyData
 import com.example.api.databinding.ActivityMyRetrofitBinding
 import retrofit2.Call
 import retrofit2.Callback
