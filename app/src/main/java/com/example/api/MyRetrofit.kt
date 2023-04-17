@@ -2,7 +2,7 @@ package com.example.api
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import com.example.api.`interface`.MyApiInterface
 import com.example.api.mydataClass.MyData
 import com.example.api.databinding.ActivityMyRetrofitBinding
@@ -38,7 +38,6 @@ class MyRetrofit : AppCompatActivity() {
                 if (productList != null) {
                     for (myData in productList) {
                         collectDataInStringBuilder.append(myData.title + " ")
-                        Toast.makeText(this@MyRetrofit, "Success", Toast.LENGTH_SHORT).show()
                     }
                     binding.TextAi.text = collectDataInStringBuilder
 
@@ -47,6 +46,8 @@ class MyRetrofit : AppCompatActivity() {
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
 //                if api call fails
+
+                Log.d("MyRetrofitActivity","onFailure ${t.message}")
             }
         })
     }
