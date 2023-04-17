@@ -2,6 +2,7 @@ package com.example.api
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.api.`interface`.MyApiInterface
 import com.example.api.databinding.ActivityMyRetrofitBinding
 import retrofit2.Call
@@ -25,12 +26,26 @@ class MyRetrofit : AppCompatActivity() {
 
         val retrofitData = retrofitBuilder.getProductData()
 
+
         retrofitData.enqueue(object : Callback<MyData?> {
             override fun onResponse(call: Call<MyData?>, response: Response<MyData?>) {
+//               if api call is success, then use the data of api and show in your app
+                val responceBody = response.body()
+                val productList = responceBody?.products
+                val collectDataInStringBuilder = StringBuilder()
 
+                if (productList != null) {
+                    for (myData in productList) {
+                        collectDataInStringBuilder.append(myData.title + " ")
+                        Toast.makeText(this@MyRetrofit, "Success", Toast.LENGTH_SHORT).show()
+                    }
+                    binding.TextAi.text = collectDataInStringBuilder
+
+                }
             }
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
+//                if api call fails
             }
         })
     }
