@@ -3,9 +3,11 @@ package com.example.api
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.api.`interface`.MyApiInterface
 import com.example.api.mydataClass.MyData
 import com.example.api.databinding.ActivityMyRetrofitBinding
+import com.example.api.mydataClass.Product
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,10 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MyRetrofit : AppCompatActivity() {
     private lateinit var binding: ActivityMyRetrofitBinding
+    private lateinit var myArrayList: ArrayList<Product>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyRetrofitBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.myRecycler.layoutManager = LinearLayoutManager(this)
+        myArrayList = arrayListOf()
 
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
@@ -46,7 +53,7 @@ class MyRetrofit : AppCompatActivity() {
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
 //                if api call fails
 
-                Log.d("MyRetrofitActivity","onFailure ${t.message}")
+                Log.d("MyRetrofitActivity", "onFailure ${t.message}")
             }
         })
     }
