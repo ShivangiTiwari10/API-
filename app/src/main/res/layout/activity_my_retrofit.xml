@@ -6,6 +6,7 @@
     tools:context=".MyRetrofit">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/my_api_items"/>
