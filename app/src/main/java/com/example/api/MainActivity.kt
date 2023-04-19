@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
-        // launching a new coroutine
+//         launching a new coroutine
         GlobalScope.launch {
             val result = quotesApi.getQuotes()
             Log.d("ayush: ", result.body().toString())

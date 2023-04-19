@@ -3,28 +3,26 @@ package com.example.api
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.example.api.`interface`.MyApiInterface
-import com.example.api.mydataClass.MyData
 import com.example.api.databinding.ActivityMyRetrofitBinding
-import com.example.api.mydataClass.Product
+import com.example.api.mydataClass.MyData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class MyRetrofit : AppCompatActivity() {
     private lateinit var binding: ActivityMyRetrofitBinding
-    private lateinit var myArrayList: ArrayList<Product>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyRetrofitBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.myRecycler.layoutManager = LinearLayoutManager(this)
-        myArrayList = arrayListOf()
 
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
@@ -37,7 +35,8 @@ class MyRetrofit : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<MyData?> {
             override fun onResponse(call: Call<MyData?>, response: Response<MyData?>) {
-//               if api call is success, then use the data of api and show in your app
+
+                ////               if api call is success, then use the data of api and show in your app
                 val responceBody = response.body()
                 val productList = responceBody?.products
                 val collectDataInStringBuilder = StringBuilder()
@@ -46,15 +45,21 @@ class MyRetrofit : AppCompatActivity() {
                     for (myData in productList) {
                         collectDataInStringBuilder.append(myData.title + " ")
                     }
+                    binding.myText.text = collectDataInStringBuilder
 
                 }
             }
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
-//                if api call fails
-
+                ////                if api call fails
+//
                 Log.d("MyRetrofitActivity", "onFailure ${t.message}")
+
             }
         })
     }
 }
+
+
+
+
