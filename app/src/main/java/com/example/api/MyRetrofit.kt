@@ -3,7 +3,7 @@ package com.example.api
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.api.`interface`.MyApiInterface
 import com.example.api.databinding.ActivityMyRetrofitBinding
 import com.example.api.mydataClass.MyData
@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MyRetrofit : AppCompatActivity() {
     private lateinit var binding: ActivityMyRetrofitBinding
-
+    private lateinit var myadapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +39,11 @@ class MyRetrofit : AppCompatActivity() {
                 ////               if api call is success, then use the data of api and show in your app
                 val responceBody = response.body()
                 val productList = responceBody?.products
-                val collectDataInStringBuilder = StringBuilder()
+                myadapter = MyAdapter(this@MyRetrofit, productList!!)
+                binding.myRecycler.adapter = myadapter
+                binding.myRecycler.layoutManager = LinearLayoutManager(this@MyRetrofit)
 
-                if (productList != null) {
-                    for (myData in productList) {
-                        collectDataInStringBuilder.append(myData.title + " ")
-                    }
-                    binding.myText.text = collectDataInStringBuilder
 
-                }
             }
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
