@@ -1,5 +1,6 @@
 package com.example.api
 
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,7 +24,9 @@ class MyRetrofit : AppCompatActivity() {
         binding = ActivityMyRetrofitBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        val progressDialog = ProgressDialog(this@MyRetrofit)
+        progressDialog.setTitle("Progress Bar")
+        progressDialog.setMessage("Application is loading, please wait")
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
             .addConverterFactory((GsonConverterFactory.create()))
@@ -31,10 +34,11 @@ class MyRetrofit : AppCompatActivity() {
             .create(MyApiInterface::class.java)
 
         val retrofitData = retrofitBuilder.getProductData()
-
+        progressDialog.show()
 
         retrofitData.enqueue(object : Callback<MyData?> {
             override fun onResponse(call: Call<MyData?>, response: Response<MyData?>) {
+                progressDialog.dismiss()
 
                 ////               if api call is success, then use the data of api and show in your app
                 val responceBody = response.body()
