@@ -24,6 +24,8 @@ class MyRetrofit : AppCompatActivity() {
         binding = ActivityMyRetrofitBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val progressDialog = ProgressDialog(this@MyRetrofit)
         progressDialog.setTitle("Progress Bar")
         progressDialog.setMessage("Application is loading, please wait")

@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
         val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
 //         launching a new coroutine
         GlobalScope.launch {
